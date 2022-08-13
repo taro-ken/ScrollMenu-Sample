@@ -119,20 +119,12 @@
 		B410AA4F28A50DB400116AFF /* ScrollMenu-Sample */ = {
 			isa = PBXGroup;
 			children = (
+				B410AAE528A7973200116AFF /* Resource */,
 				B410AA8228A50E4C00116AFF /* Exteision */,
-				B410AA5028A50DB400116AFF /* AppDelegate.swift */,
-				B410AA5228A50DB400116AFF /* SceneDelegate.swift */,
-				B410AA5428A50DB400116AFF /* HomeFeedController.swift */,
-				B410AA5628A50DB400116AFF /* HomeFeed.storyboard */,
-				B410AA5928A50DB900116AFF /* Assets.xcassets */,
-				B410AA5B28A50DB900116AFF /* LaunchScreen.storyboard */,
-				B410AA5E28A50DB900116AFF /* Info.plist */,
-				B410AA8028A50E2E00116AFF /* TopBarMenuController.swift */,
-				B410AA8528A50EA400116AFF /* TopBarMenu.storyboard */,
-				B410AA8728A5136F00116AFF /* MenuCell.swift */,
-				B410AA8828A5136F00116AFF /* MenuCell.xib */,
-				B410AA8B28A5140300116AFF /* MenuCellModel.swift */,
+				B410AAE628A7976300116AFF /* HomeFeed */,
+				B410AAE728A7977D00116AFF /* TopBarMenu */,
 				B410AA8F28A5191400116AFF /* Pages */,
+				B410AA5E28A50DB900116AFF /* Info.plist */,
 			);
 			path = "ScrollMenu-Sample";
 			sourceTree = "<group>";
@@ -171,6 +163,38 @@
 				B410AA9428A5193900116AFF /* Page2ViewController.swift */,
 			);
 			path = Pages;
+			sourceTree = "<group>";
+		};
+		B410AAE528A7973200116AFF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B410AA5B28A50DB900116AFF /* LaunchScreen.storyboard */,
+				B410AA5028A50DB400116AFF /* AppDelegate.swift */,
+				B410AA5228A50DB400116AFF /* SceneDelegate.swift */,
+				B410AA5928A50DB900116AFF /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B410AAE628A7976300116AFF /* HomeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				B410AA5428A50DB400116AFF /* HomeFeedController.swift */,
+				B410AA5628A50DB400116AFF /* HomeFeed.storyboard */,
+			);
+			path = HomeFeed;
+			sourceTree = "<group>";
+		};
+		B410AAE728A7977D00116AFF /* TopBarMenu */ = {
+			isa = PBXGroup;
+			children = (
+				B410AA8B28A5140300116AFF /* MenuCellModel.swift */,
+				B410AA8828A5136F00116AFF /* MenuCell.xib */,
+				B410AA8728A5136F00116AFF /* MenuCell.swift */,
+				B410AA8528A50EA400116AFF /* TopBarMenu.storyboard */,
+				B410AA8028A50E2E00116AFF /* TopBarMenuController.swift */,
+			);
+			path = TopBarMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

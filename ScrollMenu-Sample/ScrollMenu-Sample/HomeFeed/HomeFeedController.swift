@@ -7,8 +7,9 @@
 
 import UIKit
 
-class HomeFeedController: UIViewController, UICollectionViewDelegateFlowLayout {
+final class HomeFeedController: UIViewController, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private let topBarMenuController = TopBarMenuController(collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -17,22 +18,11 @@ class HomeFeedController: UIViewController, UICollectionViewDelegateFlowLayout {
     let vc1 = UIStoryboard.init(name: "Page1", bundle: nil).instantiateInitialViewController() as! Page1ViewController
     let vc2 = UIStoryboard.init(name: "Page2", bundle: nil).instantiateInitialViewController() as! Page2ViewController
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageViewController.dataSource = self
         topBarMenuController.topBarMenuControllerDelegate = self
-        pageViewController.setViewControllers([vc1], direction: .forward, animated: true, completion: nil)
-        self.addChild(pageViewController)
-        self.view.addSubview(pageViewController.view)
-        
-       
-        
-       let scrollView = pageViewController.view.subviews.compactMap { $0 as? UIScrollView }.first
-       scrollView?.delegate = self
+        scrollView?.delegate = self
         setupTopBarMenuController()
-        
     }
     
     private func setupTopBarMenuController() {
@@ -48,61 +38,28 @@ class HomeFeedController: UIViewController, UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension HomeFeedController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        switch viewController {
-        case vc1:
-            return vc2
-        default:
-            return nil
-        }
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        switch viewController {
-        case vc2:
-            return vc1
-        default:
-            return nil
-        }
-    }
-}
-
 extension HomeFeedController: TopBarMenuControllerDelegate {
     //メニューアイテムをタップした時に画面がスライドする機能
     func didTapMenu(indexPath: IndexPath) {
-        switch indexPath.item {
-        case 0:
-            pageViewController.setViewControllers([vc1], direction: .reverse, animated: true, completion: nil)
-        case 1:
-            pageViewController.setViewControllers([vc2], direction: .forward, animated: true, completion: nil)
-        default:
-            break
-        }
+        scrollToPage(page: indexPath.item, animated: true)
     }
 }
 
 extension HomeFeedController: UIScrollViewDelegate {
-    //画面を横にスクロールした時にメニューバー内の下枠(青)が付いてくる仕様
+    //画面を横にスクロールした時に青いViewが付いてくる仕様
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let x = scrollView.contentOffset.x
         let offset = x / 2
         let hoge = x - view.frame.width
         print(offset)
         topBarMenuController.menuBottomLine.transform = CGAffineTransform(translationX: offset, y: 0)
-}
+    }
     
-    
-    
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        let x = targetContentOffset.pointee.x
-//        let item = x / view.frame.width
-//
-//        topBarMenuController.menuBottomLine.transform = CGAffineTransform(translationX: item, y: 0)
-        //     print(view.frame.width)
-        //    let indexPath = IndexPath(item: Int(item), section: 0)
-        //    topBarMenuController.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+    func scrollToPage(page: Int, animated: Bool) {
+        var frame: CGRect = self.scrollView.bounds
+        frame.origin.x = frame.size.width * CGFloat(page)
+        frame.origin.y = 0
+        self.scrollView.scrollRectToVisible(frame, animated: animated)
     }
 }
 
